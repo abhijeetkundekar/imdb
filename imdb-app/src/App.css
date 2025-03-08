@@ -1,8 +1,6 @@
 #root {
-  max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  padding: 1rem;
 }
 
 .logo {
@@ -39,4 +37,26 @@
 
 .read-the-docs {
   color: #888;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: aquamarine;
+}
+
+.header h1 {
+  font-size: 2.5em;
+  margin: 0;
+}
+
+.header ul {
+  display: flex;
+  list-style: none;
+  padding: 0;
+}
+
+.header ul li {
+  margin-right: 1em;
 }
