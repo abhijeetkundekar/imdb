@@ -1,6 +1,5 @@
 #root {
   margin: 0 auto;
-  padding: 1rem;
 }
 
 .logo {
@@ -43,20 +42,75 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: aquamarine;
+  margin-bottom: 2em;
+  background-color: rgb(200, 51, 17);
+  padding: 0 15px;
 }
 
 .header h1 {
-  font-size: 2.5em;
-  margin: 0;
+  font-size: 20px;
 }
 
 .header ul {
   display: flex;
-  list-style: none;
-  padding: 0;
+  gap: 1em;
 }
 
 .header ul li {
-  margin-right: 1em;
+  list-style: none;
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  width: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.movie-list {
+  display: flex;
+  gap: 1em;
+  flex-wrap: wrap;
+}
+
+.movie-list-page {
+  padding: 0px 30px;
+}
+
+.pagination {
+  display: flex;
+}
+
+.pagination button {
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+}
+.pagination button:hover {
+  background-color: rgb(255, 85, 0);
+}
+.pagination button.active {
+  background-color: rgb(200, 51, 17);
+}
+
+.pagination-section {
+  display: flex;
+  justify-content: center;
+  margin: 30px 0px;
+}
+
+a {
+  font-weight: 500;
+  color: orange;
+  text-decoration: inherit;
+}
+a:hover {
+  color: maroon;
+}
+
+.watchList {
+  display: block; /* Makes the button a block element */
+  margin: 0 auto; /* Centers horizontally */
+  color: tomato;
 }

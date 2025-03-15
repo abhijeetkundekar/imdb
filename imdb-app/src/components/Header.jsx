@@ -8,7 +8,9 @@ const Header = () => {
 
       <ul>
         <li>
-          <Link to="/">Home</Link>
+          <Link style={{ color: "none", underline: "always" }} to="/">
+            Home
+          </Link>
         </li>
         <li>
           <Link to="/details">Movies</Link>
