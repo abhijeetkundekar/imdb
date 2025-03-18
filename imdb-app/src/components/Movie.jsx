@@ -1,4 +1,8 @@
-const Movie = ({ movie }) => {
+const Movie = ({ movie, watchList, setWatchList }) => {
+  const handleWatchListBtnClk = () => {
+    setWatchList({ ...watchList, [movie.id]: movie });
+    console.log(watchList);
+  };
   return (
     <div className="movie">
       <img
@@ -7,7 +11,9 @@ const Movie = ({ movie }) => {
       />
       <div className="movie-info">
         <h3>{movie.title}</h3>
-        <button className="watchList">+Watchlist</button>
+        <button className="watchList" onClick={handleWatchListBtnClk}>
+          {watchList[movie.id] ? "-" : "+"}Watchlist
+        </button>
       </div>
     </div>
   );
