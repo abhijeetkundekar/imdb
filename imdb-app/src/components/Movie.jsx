@@ -1,7 +1,16 @@
-const Movie = ({ movie, watchList, setWatchList }) => {
-  const handleWatchListBtnClk = () => {
-    setWatchList({ ...watchList, [movie.id]: movie });
-    console.log(watchList);
+import { useDispatch, useSelector } from "react-redux";
+import { addToWatchlist, removeFromWatchlist } from "../lib/watchListSlice";
+
+const Movie = ({ movie }) => {
+  const watchlist = useSelector((state) => state.watchList);
+  const dispatch = useDispatch();
+
+  const handleWatchListBtnClick = () => {
+    if (!watchlist[movie.id]) {
+      dispatch(addToWatchlist({ ...movie }));
+    } else {
+      dispatch(removeFromWatchlist(movie.id));
+    }
   };
   return (
     <div className="movie">
@@ -11,8 +20,8 @@ const Movie = ({ movie, watchList, setWatchList }) => {
       />
       <div className="movie-info">
         <h3>{movie.title}</h3>
-        <button className="watchList" onClick={handleWatchListBtnClk}>
-          {watchList[movie.id] ? "-" : "+"}Watchlist
+        <button onClick={handleWatchListBtnClick}>
+          {watchlist[movie.id] ? "-" : "+"} Watchlist
         </button>
       </div>
     </div>
