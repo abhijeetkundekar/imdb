@@ -18,7 +18,7 @@ const Movie = ({ movie }) => {
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
       />
-      <div className="movie-info">
+      <div className="movie-info" key={movie.id}>
         <h3>{movie.title}</h3>
         <button onClick={handleWatchListBtnClick}>
           {watchlist[movie.id] ? "-" : "+"} Watchlist
