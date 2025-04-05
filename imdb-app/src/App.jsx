@@ -1,11 +1,11 @@
-import { StrictMode, useState } from "react";
+import { lazy, StrictMode, Suspense, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router";
 import Header from "./components/Header";
-import MovieListPage from "./pages/MovieListPage";
-import WatchListPage from "./pages/WatchListPage";
-import MovieDetailsPage from "./pages/MovieDetailsPage";
 
+const LazyMovieListPage = lazy(() => import("./pages/MovieListPage.jsx"));
+const LazywatchListPage = lazy(() => import("./pages/WatchListPage.jsx"));
+const LazyMovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage.jsx"));
 function App() {
   const [watchList, setWatchList] = useState({});
 
@@ -13,25 +13,27 @@ function App() {
     <BrowserRouter>
       <StrictMode>
         <Header />
-        <Routes>
-          {/* Add routes here */}
-          <Route
-            path="/"
-            element={
-              <MovieListPage
-                watchList={watchList}
-                setWatchList={setWatchList}
-              />
-            }
-          />
-          {/* watch list */}
-          <Route
-            path="/watchlist"
-            element={<WatchListPage watchList={watchList} />}
-          />
-          <Route path="/details" element={<MovieDetailsPage />} />
-          <Route path="*" element={<h2>Page Not Found!</h2>} />
-        </Routes>
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Routes>
+            {/* Add routes here */}
+            <Route
+              path="/"
+              element={
+                <LazyMovieListPage
+                  watchList={watchList}
+                  setWatchList={setWatchList}
+                />
+              }
+            />
+            {/* watch list */}
+            <Route
+              path="/watchlist"
+              element={<LazywatchListPage watchList={watchList} />}
+            />
+            <Route path="/details" element={<LazyMovieDetailsPage />} />
+            <Route path="*" element={<h2>Page Not Found!</h2>} />
+          </Routes>
+        </Suspense>
       </StrictMode>
     </BrowserRouter>
   );
