@@ -1,35 +1,42 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { lazy, StrictMode, Suspense, useState } from "react";
+import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router";
+import Header from "./components/Header";
 
+const LazyMovieListPage = lazy(() => import("./pages/MovieListPage.jsx"));
+const LazywatchListPage = lazy(() => import("./pages/WatchListPage.jsx"));
+const LazyMovieDetailsPage = lazy(() => import("./pages/MovieDetailsPage.jsx"));
 function App() {
-  const [count, setCount] = useState(0)
+  const [watchList, setWatchList] = useState({});
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <BrowserRouter>
+      <StrictMode>
+        <Header />
+        <Suspense fallback={<h2>Loading...</h2>}>
+          <Routes>
+            {/* Add routes here */}
+            <Route
+              path="/"
+              element={
+                <LazyMovieListPage
+                  watchList={watchList}
+                  setWatchList={setWatchList}
+                />
+              }
+            />
+            {/* watch list */}
+            <Route
+              path="/watchlist"
+              element={<LazywatchListPage watchList={watchList} />}
+            />
+            <Route path="/details" element={<LazyMovieDetailsPage />} />
+            <Route path="*" element={<h2>Page Not Found!</h2>} />
+          </Routes>
+        </Suspense>
+      </StrictMode>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
