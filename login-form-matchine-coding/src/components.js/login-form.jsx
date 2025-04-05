@@ -11,11 +11,9 @@ const LoginForm = () => {
   };
 
   const handleUserNameChange = (e) => {
-    console.log("username", e.target.value);
     usernameRef.current = e.target.value;
   };
   const handlePasswordChange = (e) => {
-    console.log("password", e.target.value);
     passwordRef.current = e.target.value;
   };
   return (
