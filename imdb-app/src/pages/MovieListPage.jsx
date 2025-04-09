@@ -7,14 +7,13 @@ import { fetchMovies } from "../lib/moviesSlice";
 const MovieListPage = () => {
   const totalPages = useSelector((state) => state.movieList.totalPages);
   const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchMovies(1));
+  }, []);
 
   const handlePageChange = (pageNo) => {
     dispatch(fetchMovies(pageNo));
   };
-
-  useEffect(() => {
-    dispatch(fetchMovies(1));
-  }, []);
 
   return (
     <div className="movie-list-page">

@@ -30,6 +30,10 @@ const WatchListPage = () => {
 
   const [list, setList] = useState([]);
 
+  useEffect(() => {
+    setList(Object.values(watchlist));
+  }, [watchlist]);
+
   const handleMovieSearch = (e) => {
     const newList = Object.values(watchlist).filter((movie) =>
       movie.title.toLowerCase().includes(e.target.value.toLowerCase())
@@ -64,10 +68,6 @@ const WatchListPage = () => {
   const handleRemoveFromWatchList = (movieId) => {
     dispatch(removeFromWatchlist(movieId));
   };
-
-  useEffect(() => {
-    setList(Object.values(watchlist));
-  }, [watchlist]);
 
   return (
     <div>
